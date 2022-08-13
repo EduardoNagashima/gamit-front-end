@@ -6,15 +6,72 @@ export const FeedSection = styled.section`
     align-items: center;
     width: 75%;
     height: 100rem;
-    background-color: red;
+`
+
+export const ThumbTittle = styled.h2`
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-weight: 700;
+    text-align: left;
+    font-size: 30px;
+    padding: 10px;
 `
 
 export const PostThumbnail = styled.div`
-    width: 80rem;
-    height: 40rem;
+    width: 90%;
+    height: auto;
 
     background: #2C343A;
     border-radius: 16px;
     margin-bottom: 2rem;
     margin-top: 2rem;
+`
+
+export const ThumbUserDiv = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 10px;
+    img {
+        width: 40px;
+        height: 40px;
+        object-fit: cover;
+        border-radius: 50px;
+    }
+    spam { 
+        color: white;
+        font-size: 18px;
+    }
+`
+
+export const ImgDiv = styled.div`
+    img{
+        border-radius: 16px 16px 0px 0px;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+`
+
+export const ThumbDetails = styled.div`
+    display: flex;
+    align-items: center;
+    width: auto;
+    padding: 10px;
+    justify-content: space-between;
+    
+    div {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+        justify-content: center;
+        p {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 400;
+            font-size: 15px;
+            line-height: 19px;
+            color: #95999C;
+        }
+    }
 `
