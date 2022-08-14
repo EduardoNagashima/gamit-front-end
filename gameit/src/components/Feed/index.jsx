@@ -5,49 +5,56 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 
 export default function Feed() {
-    const [posts, setPosts] = useState('');
+    const [posts, setPosts] = useState([]);
     const salvo = true;
     const like = true;
-    const username = 'Eduardo Nagashima'
 
     useEffect(() => {
         const config = {
             headers: {
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1OTk2NzcwMiwiZXhwIjoxNjYyNTU5NzAyfQ.gAgXX4yO9yta-Ry-iYQumXV6lr4Zb24LXIYY_TdsY0Q`
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY2MDQ5MDE4NSwiZXhwIjoxNjYzMDgyMTg1fQ.M049T1ym90WuDg--v3uSnBERUUcUk-Ih9X47yaBAkKQ`
             }
         }
         api.get("/posts", config).then(res => {
             setPosts(res.data);
         }).catch(err => {
             console.error(err);
-        })
+        }).finally(() => {
+            console.log(posts);
+        });
 
     }, []);
-    console.log(posts);
+
 
     return (
         <FeedSection>
-            <PostThumbnail>
-                <ImgDiv>
-                    <img src="https://bnetcmsus-a.akamaihd.net/cms/blog_header/ck/CKVBTJLOOMIU1656284468947.png" alt="" />
-                </ImgDiv>
-                <div>
-                    <ThumbTittle>Acabou o beta :(</ThumbTittle>
-                    <ThumbUserDiv>
-                        <img src="https://c4.wallpaperflare.com/wallpaper/787/854/424/jujutsu-kaisen-satoru-gojo-anime-boys-anime-girls-hd-wallpaper-preview.jpg" alt="" />
-                        <p>{username}</p>
-                    </ThumbUserDiv>
-                    <ThumbDetails>
-                        <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
-                            <div>
-                                {like ? <RiHeartFill /> : <RiHeartLine />}
-                                <RiTimeFill /> <p> 0 vizualizações </p>
-                            </div>
-                            {salvo ? <RiSaveFill /> : <RiSaveLine />}
-                        </IconContext.Provider>
-                    </ThumbDetails>
-                </div>
-            </PostThumbnail>
+            {posts?.map(el => {
+                return (
+                    <PostThumbnail key={el.id}>
+                        <ImgDiv>
+                            <img src={el.coverImg} alt="photo" />
+                        </ImgDiv>
+                        <div>
+                            <ThumbTittle>{el.tittle}</ThumbTittle>
+                            <ThumbUserDiv>
+                                <img src={el.user.image} alt="" />
+                                <p>{el.user.username}</p>
+                            </ThumbUserDiv>
+                            <ThumbDetails>
+                                <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
+                                    <div>
+                                        {like ? <RiHeartFill /> : <RiHeartLine />}
+                                        <RiTimeFill /> <p> 0 vizualizações </p>
+                                    </div>
+                                    {salvo ? <RiSaveFill /> : <RiSaveLine />}
+                                </IconContext.Provider>
+                            </ThumbDetails>
+                        </div>
+                    </PostThumbnail>
+
+                );
+            })}
         </FeedSection>
+
     );
 }
