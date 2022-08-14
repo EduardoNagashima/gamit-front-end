@@ -1,8 +1,11 @@
 import { HeaderSection, HeaderDiv, UserDiv, HeaderContent } from "./style";
 import { FaBell, FaAngleDown } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
+import { useContext, useState } from "react";
+import UserContext from "../../contexts/UserContext";
 
 export default function Header() {
+    const [userData] = useState(useContext(UserContext).userInfo);
     return (
         <HeaderSection>
             <HeaderContent>
@@ -12,8 +15,8 @@ export default function Header() {
                 <HeaderDiv>
                     <IconContext.Provider value={{ color: "white", style: { fontSize: '1.5rem' } }}>
                         <UserDiv>
-                            <img src="https://c4.wallpaperflare.com/wallpaper/787/854/424/jujutsu-kaisen-satoru-gojo-anime-boys-anime-girls-hd-wallpaper-preview.jpg" alt="avatar" />
-                            <h2>username</h2>
+                            <img src={userData.image} alt="avatar" />
+                            <h2>{userData.username}</h2>
                             <FaAngleDown />
                             <FaBell />
                         </UserDiv>
