@@ -1,10 +1,11 @@
 import styled from "styled-components";
 
 export const FeedSection = styled.section`
+    margin: 0 1% 0 2%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 75%;
+    width: 70%;
     height: 100rem;
 `
 
@@ -18,7 +19,7 @@ export const ThumbTittle = styled.h2`
 `
 
 export const PostThumbnail = styled.div`
-    width: 90%;
+    width: 100%;
     height: auto;
 
     background: #2C343A;
@@ -38,7 +39,7 @@ export const ThumbUserDiv = styled.div`
         object-fit: cover;
         border-radius: 50px;
     }
-    spam { 
+    p { 
         color: white;
         font-size: 18px;
     }
