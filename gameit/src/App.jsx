@@ -11,12 +11,12 @@ import "./assets/styles/style.css";
 
 const App = () => {
 
-    const [token, setToken] = useState(JSON.parse(localStorage.getItem('token')));
-    const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
+    const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
+    const [userInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
 
     return (
         <BrowserRouter>
-            <UserContext.Provider value={{ token, setToken, userInfo, setUserInfo }}>
+            <UserContext.Provider value={{ token, userInfo }}>
                 <Header />
                 <Routes>
                     <Route path="/" element={<Home />} />

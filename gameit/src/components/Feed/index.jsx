@@ -1,10 +1,12 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
 import { IconContext } from "react-icons/lib";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
+import UserContext from "../../contexts/UserContext";
 
-export default function Feed() {
+export default function Feed({ counter }) {
+    const [token] = useState(useContext(UserContext).token);
     const [posts, setPosts] = useState([]);
     const salvo = true;
     const like = true;
@@ -12,18 +14,15 @@ export default function Feed() {
     useEffect(() => {
         const config = {
             headers: {
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY2MDQ5MDE4NSwiZXhwIjoxNjYzMDgyMTg1fQ.M049T1ym90WuDg--v3uSnBERUUcUk-Ih9X47yaBAkKQ`
+                "Authorization": `Bearer ${token}`
             }
         }
         api.get("/posts", config).then(res => {
             setPosts(res.data);
         }).catch(err => {
             console.error(err);
-        }).finally(() => {
-            console.log(posts);
-        });
-
-    }, []);
+        })
+    }, [counter]);
 
 
     return (

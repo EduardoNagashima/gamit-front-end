@@ -25,9 +25,9 @@ export default function Login() {
         }
         api.post('/signin', userInfo)
             .then(res => {
-                console.log(res.data);
                 const { token, image, username } = res.data;
                 const userInfo = { image, username };
+                console.log(token);
                 localStorage.setItem('authorization', JSON.stringify(token));
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 navigate("/");

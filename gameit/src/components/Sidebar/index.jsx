@@ -1,13 +1,15 @@
 import { SidebarSection, PostCreationContainer } from "./style"
-import { useState } from "react";
+import { useState, useContext } from "react";
 import api from "../../services/api";
+import UserContext from "../../contexts/UserContext";
 
-export default function Sidebar() {
+export default function Sidebar({ counter, setCounter }) {
+    const [token] = useState(useContext(UserContext).token);
     const [postInfos, setPostInfos] = useState({
         tittle: '',
         coverImg: '',
         content: ''
-    })
+    });
 
     function postPost(e) {
         e.preventDefault();
@@ -16,9 +18,10 @@ export default function Sidebar() {
             alert('Campos vazios!');
             return;
         }
+
         const config = {
             headers: {
-                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY2MDQ5MDE4NSwiZXhwIjoxNjYzMDgyMTg1fQ.M049T1ym90WuDg--v3uSnBERUUcUk-Ih9X47yaBAkKQ`
+                "Authorization": `Bearer ${token}`
             }
         }
 
@@ -28,11 +31,22 @@ export default function Sidebar() {
             content,
             categoryId: 1
         }
-        api.post('/post', body, config).then(res => {
-            console.log(res);
-        }).catch(err => {
-            console.log(err.response.data)
-        })
+        api.post('/post', body, config)
+            .then(res => {
+                setPostInfos({
+                    tittle: '',
+                    coverImg: '',
+                    content: ''
+                });
+                alert('Postagem criada com sucesso!');
+                setCounter(counter + 1);
+            })
+            .catch(err => {
+                console.log(err.response.data)
+                if (err.response.data[0].context.label === 'coverImg') {
+                    alert('ERRO!!! Coloque uma imagem de fundo válida: -COMEÇAR COM http(s)://... -TERMINAR COM (.png, .jpg, .jpeg, .gif, .png, .svg)')
+                }
+            });
     }
 
     return (
@@ -41,13 +55,17 @@ export default function Sidebar() {
                 <form onSubmit={postPost}>
                     <p>Create Post</p>
                     <h3>Tittle: </h3>
-                    <input type="text"
+                    <input
+                        required
+                        type="text"
                         name='tittle'
                         value={postInfos.tittle}
                         onChange={e => setPostInfos({ ...postInfos, tittle: e.target.value })}
                     />
-                    <h3>Cover Photo: (opcional)</h3>
-                    <input type="text"
+                    <h3>Cover Photo: </h3>
+                    <input
+                        required
+                        type="text"
                         name='photo'
                         placeholder='http://...'
                         value={postInfos.coverImg}
@@ -55,9 +73,10 @@ export default function Sidebar() {
                     />
                     <h3>Content:</h3>
                     <textarea
+                        required
+                        rows="10"
                         cols="30"
                         name='content'
-                        rows="10"
                         placeholder='I think...'
                         value={postInfos.content}
                         onChange={e => setPostInfos({ ...postInfos, content: e.target.value })}

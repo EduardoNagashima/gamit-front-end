@@ -42,3 +42,42 @@ export const UserDiv = styled.div`
         color: white;
     }
 `
+export const InvisibleDiv = styled.div`
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    right: 0;
+    z-index: 1;
+    left: 0;
+`
+
+export const LogoutDiv = styled.div`
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: ${(props) => props.hidden === true ? 'visible' : 'hidden'};
+    position: absolute;
+    background-color: #171717;
+    color: #FFF;
+    top: 62px;
+    right: 0px;
+    width: 15%;
+    height: 50px;
+    background: #1c232b;
+    border-radius: 0px 0px 20px 20px;
+    font-family: 'Lato', sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 17px;
+    color: #FFFFFF;
+    transition: 0s;
+    span {
+        transition: 0s;
+        border-radius: 0px 0px 20px 20px;
+        z-index: 3;
+        padding: 40px;
+        margin-right: 10px;
+    }
+`
