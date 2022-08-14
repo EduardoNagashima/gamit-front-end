@@ -1,30 +1,33 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
 import { IconContext } from "react-icons/lib";
-// import { useState, useEffect } from "react";
-// import axios from "axios";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 export default function Feed() {
+    const [posts, setPosts] = useState('');
     const salvo = true;
     const like = true;
     const username = 'Eduardo Nagashima'
 
-    // useEffect(() => {
-    //     const config = {
-    //         headers: {
-    //             "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1OTk2NzcwMiwiZXhwIjoxNjYyNTU5NzAyfQ.gAgXX4yO9yta-Ry-iYQumXV6lr4Zb24LXIYY_TdsY0Q`
-    //         }
-    //     }
-    //     const res = axios.get("http://localhost:5000/posts", config);
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImlhdCI6MTY1OTk2NzcwMiwiZXhwIjoxNjYyNTU5NzAyfQ.gAgXX4yO9yta-Ry-iYQumXV6lr4Zb24LXIYY_TdsY0Q`
+            }
+        }
+        axios.get("http://localhost:5000/posts", config).then(res => {
+            console.log(res);
+        }).then(res => {
+            console.log(res.data);
+            setPosts(res.data);
+        }).catch(err => {
+            console.error(err);
+        })
 
-    //     res.then(res => {
-    //         console.log(res.data);
-    //     }).catch(err => {
-    //         console.error(err);
-    //     })
+    }, []);
 
-    // }, []);
-
+    console.log(posts)
 
     return (
         <FeedSection>
