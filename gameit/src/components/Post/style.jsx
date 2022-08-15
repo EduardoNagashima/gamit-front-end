@@ -6,3 +6,7 @@ export const PostSection = styled.section`
     background-color: beige;
     margin-top: 60px;
 `
+
+export const PostDiv = styled.div`
+    
+`

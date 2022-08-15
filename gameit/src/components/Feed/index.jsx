@@ -4,10 +4,12 @@ import { IconContext } from "react-icons/lib";
 import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
 import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
 
 export default function Feed({ counter }) {
-    const [token] = useState(useContext(UserContext).token);
     const [posts, setPosts] = useState([]);
+    const [token] = useState(useContext(UserContext).token);
+    const navigate = useNavigate();
     const salvo = true;
     const like = true;
 
@@ -24,12 +26,15 @@ export default function Feed({ counter }) {
         })
     }, [counter]);
 
+    function goToPage(id) {
+        navigate('/post/' + id);
+    }
 
     return (
         <FeedSection>
             {posts?.map(el => {
                 return (
-                    <PostThumbnail key={el.id}>
+                    <PostThumbnail key={el.id} onClick={() => { goToPage(el.id) }}>
                         <ImgDiv>
                             <img src={el.coverImg} alt="photo" />
                         </ImgDiv>
@@ -43,7 +48,8 @@ export default function Feed({ counter }) {
                                 <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
                                     <div>
                                         {like ? <RiHeartFill /> : <RiHeartLine />}
-                                        <RiTimeFill /> <p> 0 vizualizações </p>
+                                        <RiTimeFill /> <p> {el.views} vizualizações </p>
+                                        <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
                                     {salvo ? <RiSaveFill /> : <RiSaveLine />}
                                 </IconContext.Provider>

@@ -65,8 +65,7 @@ export const ThumbDetails = styled.div`
     div {
         display: flex;
         gap: 1rem;
-        align-items: center;
-        justify-content: center;
+        align-items: flex-end;
         p {
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
@@ -74,5 +73,13 @@ export const ThumbDetails = styled.div`
             line-height: 19px;
             color: #95999C;
         }
+    }
+    small {
+        font-size: 15px;
+        color: #95999C;
+        font-weight: 400;
+        text-align: center;
+        justify-self: center;
+        align-self: center;
     }
 `
