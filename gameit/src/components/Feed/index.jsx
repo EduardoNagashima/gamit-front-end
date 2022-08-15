@@ -6,7 +6,7 @@ import api from "../../services/api";
 import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Feed({ counter }) {
+export default function Feed({ counter, setCounter }) {
     const [posts, setPosts] = useState([]);
     const [token] = useState(useContext(UserContext).token);
     const navigate = useNavigate();

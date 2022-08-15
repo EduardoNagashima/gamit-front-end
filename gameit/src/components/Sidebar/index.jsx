@@ -1,10 +1,14 @@
-import { SidebarSection, PostCreationContainer } from "./style"
-import { useState, useContext } from "react";
+import { SidebarSection, PostCreationContainer, EyeDiv, UserContainer, MostViewContainer } from "./style"
+import { useState, useContext, useEffect } from "react";
 import api from "../../services/api";
 import UserContext from "../../contexts/UserContext";
+import { useNavigate } from "react-router-dom";
+import { FaEye } from "react-icons/fa";
 
 export default function Sidebar({ counter, setCounter }) {
+    const navigate = useNavigate();
     const [token] = useState(useContext(UserContext).token);
+    const [mostViews, setMostViews] = useState([]);
     const [postInfos, setPostInfos] = useState({
         tittle: '',
         coverImg: '',
@@ -49,6 +53,23 @@ export default function Sidebar({ counter, setCounter }) {
             });
     }
 
+    useEffect(() => {
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        }
+
+        api.get('/post/mostviews', config)
+            .then(res => {
+                setMostViews(res.data);
+            })
+    }, [])
+
+    function goToPage(id) {
+        navigate('/post/' + id);
+    }
+
     return (
         <SidebarSection>
             <PostCreationContainer>
@@ -84,6 +105,23 @@ export default function Sidebar({ counter, setCounter }) {
                     <button type="submit"> Publish </button>
                 </form>
             </PostCreationContainer>
+
+            <MostViewContainer>
+                <p>Most Views:</p>
+                {mostViews?.map(el => {
+                    return (
+                        <UserContainer key={el.id} onClick={() => goToPage(el.id)}>
+                            <div>
+                                <img src={el.user.image} alt="user-avatar" />
+                                <h2>{el.user.username}</h2>
+                            </div>
+                            <small>{el.tittle}</small>
+                            <h3><FaEye />{el.views}</h3>
+                        </UserContainer>
+                    );
+                })
+                }
+            </MostViewContainer>
         </SidebarSection>
     )
 }

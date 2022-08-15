@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderSection = styled.header`
+z-index: 2;
     position: fixed;
     display: flex;
     align-items: center;

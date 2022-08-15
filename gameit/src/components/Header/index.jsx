@@ -24,7 +24,7 @@ export default function Header() {
     return (
         <HeaderSection>
             <HeaderContent>
-                <HeaderDiv>
+                <HeaderDiv onClick={() => navigate('/')}>
                     <h1>GameIt</h1>
                 </HeaderDiv>
                 <HeaderDiv>

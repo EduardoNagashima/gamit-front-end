@@ -27,7 +27,6 @@ export default function Login() {
             .then(res => {
                 const { token, image, username } = res.data;
                 const userInfo = { image, username };
-                console.log(token);
                 localStorage.setItem('authorization', JSON.stringify(token));
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
                 navigate("/");
