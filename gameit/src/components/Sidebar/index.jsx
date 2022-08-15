@@ -1,4 +1,4 @@
-import { SidebarSection, PostCreationContainer, EyeDiv, UserContainer, MostViewContainer } from "./style"
+import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style"
 import { useState, useContext, useEffect } from "react";
 import api from "../../services/api";
 import UserContext from "../../contexts/UserContext";
@@ -54,6 +54,7 @@ export default function Sidebar({ counter, setCounter }) {
     }
 
     useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('authorization'));
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`

@@ -1,19 +1,19 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
 import { IconContext } from "react-icons/lib";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import api from "../../services/api";
-import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 
-export default function Feed({ counter, setCounter }) {
+export default function Feed({ counter }) {
     const [posts, setPosts] = useState([]);
-    const [token] = useState(useContext(UserContext).token);
+    const [loading, setLoading] = useState([true]);
     const navigate = useNavigate();
     const salvo = true;
     const like = true;
 
     useEffect(() => {
+        const token = JSON.parse(localStorage.getItem('authorization'));
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -23,6 +23,8 @@ export default function Feed({ counter, setCounter }) {
             setPosts(res.data);
         }).catch(err => {
             console.error(err);
+        }).finally(() => {
+            setLoading(false);
         })
     }, [counter]);
 
@@ -32,11 +34,11 @@ export default function Feed({ counter, setCounter }) {
 
     return (
         <FeedSection>
-            {posts?.map(el => {
+            {!loading && posts?.map(el => {
                 return (
                     <PostThumbnail key={el.id} onClick={() => { goToPage(el.id) }}>
                         <ImgDiv>
-                            <img src={el.coverImg} alt="photo" />
+                            <img src={el.coverImg} alt="cover" />
                         </ImgDiv>
                         <div>
                             <ThumbTittle>{el.tittle}</ThumbTittle>
@@ -56,10 +58,8 @@ export default function Feed({ counter, setCounter }) {
                             </ThumbDetails>
                         </div>
                     </PostThumbnail>
-
                 );
             })}
         </FeedSection>
-
     );
 }

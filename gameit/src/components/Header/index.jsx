@@ -2,14 +2,12 @@ import { HeaderSection, HeaderDiv, UserDiv, HeaderContent, LogoutDiv, InvisibleD
 import { FaBell, FaAngleDown, FaAngleUp } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
-import { useContext, useState } from "react";
-import UserContext from "../../contexts/UserContext";
+import { useState } from "react";
 
 export default function Header() {
     const navigate = useNavigate();
-    const [userData] = useState(useContext(UserContext).userInfo);
+    const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [showLogout, setshowLogout] = useState(false);
-
     function showWindow() {
         showLogout ? setshowLogout(false) : setshowLogout(true);
     }
@@ -44,6 +42,6 @@ export default function Header() {
 
                 </HeaderDiv>
             </HeaderContent>
-        </HeaderSection>
+        </HeaderSection >
     );
 }

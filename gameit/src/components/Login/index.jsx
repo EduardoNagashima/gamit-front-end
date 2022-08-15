@@ -10,10 +10,10 @@ export default function Login() {
         password: ''
     });
     const [signUpInfo, setSignUpInfo] = useState({
-        email: '',
-        password: '',
-        confirmpassword: '',
-        username: '',
+        email: 'eduyudji3@hotmail.com',
+        password: '123',
+        confirmPassword: '123',
+        username: 'nagashi',
         image: ''
     });
     const [toggleLogin, setToggleLogin] = useState(true);
@@ -39,6 +39,19 @@ export default function Login() {
     function SignUp(e) {
         e.preventDefault();
         console.log(signUpInfo)
+        api.post('/signup', signUpInfo)
+            .then(res => {
+                if (res.status === 201) {
+                    alert('Conta criada com sucesso!');
+                    setToggleLogin(!toggleLogin);
+                }
+            })
+            .catch(err => {
+                console.error(err.response.data.forEach(el => {
+                    alert(el);
+                    console.error(el);
+                }));
+            })
     }
 
     return (
@@ -53,16 +66,16 @@ export default function Login() {
                 </form>}
                 {!toggleLogin && <form onSubmit={SignUp}>
                     <p>Email:</p>
-                    <input type="email" onChange={e => setSignUpInfo({ ...signUpInfo, email: e.target.value })} />
+                    <input required type="email" onChange={e => setSignUpInfo({ ...signUpInfo, email: e.target.value })} />
                     <p>Username:</p>
-                    <input type="text" onChange={e => setSignUpInfo({ ...signUpInfo, username: e.target.value })} />
+                    <input required type="text" onChange={e => setSignUpInfo({ ...signUpInfo, username: e.target.value })} />
                     <p>Image:</p>
-                    <input type="text" placeholder='http://...' onChange={e => setSignUpInfo({ ...signUpInfo, image: e.target.value })} />
+                    <input required type="text" placeholder='http://...' onChange={e => setSignUpInfo({ ...signUpInfo, image: e.target.value })} />
                     <p>Password:</p>
-                    <input type="password" onChange={e => setSignUpInfo({ ...signUpInfo, password: e.target.value })} />
+                    <input required type="password" onChange={e => setSignUpInfo({ ...signUpInfo, password: e.target.value })} />
                     <p>Confirm Password:</p>
-                    <input type="password" onChange={e => setSignUpInfo({ ...signUpInfo, confirmpassword: e.target.value })} />
-                    <button>Login</button>
+                    <input required type="password" onChange={e => setSignUpInfo({ ...signUpInfo, confirmPassword: e.target.value })} />
+                    <button>Create Account</button>
                 </form>}
             </div>
             {toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Não tem uma conta? Clique Aqui!</h3>}

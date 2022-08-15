@@ -1,14 +1,13 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
-import UserContext from "../../contexts/UserContext";
 import { PostSection, PostDiv, UserInfoDiv } from "./style.jsx";
 import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
 
 export default function Post() {
     const { id } = useParams();
-    const [token] = useState(useContext(UserContext).token);
+    const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [postInfo, setPostInfo] = useState({});
 
     useEffect(() => {
@@ -24,8 +23,8 @@ export default function Post() {
             .catch(err => {
                 console.error(err);
             })
-    }, []);
-    console.log(postInfo)
+    }, [token]);
+
     return (
         <PostSection>
             {postInfo.user &&

@@ -10,7 +10,7 @@ export const PostDiv = styled.div`
     background-color: #e4dfdf;
     border-radius: 10px;
     width: 100%;
-    max-width: 1820px;
+    max-width: 1090px;
     min-width: 1000px;
     height: auto;
     
