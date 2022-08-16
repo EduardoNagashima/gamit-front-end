@@ -47,10 +47,7 @@ export default function Login() {
                 }
             })
             .catch(err => {
-                console.error(err.response.data.forEach(el => {
-                    alert(el);
-                    console.error(el);
-                }));
+                console.error(err.response.data);
             })
     }
 
