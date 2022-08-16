@@ -3,11 +3,12 @@ import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv } from "./style.jsx";
-import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
+import { RiHeartLine, RiHeartFill, RiTimeFill, RiEraserFill } from 'react-icons/ri';
 
 export default function Post() {
     const { id } = useParams();
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
+    const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [postInfo, setPostInfo] = useState({});
 
     useEffect(() => {
@@ -46,7 +47,7 @@ export default function Post() {
                                 {true ? <RiHeartFill /> : <RiHeartLine />}
                                 <RiTimeFill /> <strong> {postInfo.views} vizualizações </strong>
                             </div>
-                            {false ? <RiSaveFill /> : <RiSaveLine />}
+                            {postInfo.user.username === userData.username ? <RiEraserFill /> : <></>}
                         </IconContext.Provider>
 
                     </div>

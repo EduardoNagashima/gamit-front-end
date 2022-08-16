@@ -1,5 +1,5 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
-import { RiSaveFill, RiSaveLine, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
+import { RiEraserFill, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
 import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
@@ -8,8 +8,8 @@ import { useNavigate } from "react-router-dom";
 export default function Feed({ counter }) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState([true]);
+    const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const navigate = useNavigate();
-    const salvo = true;
     const like = true;
 
     useEffect(() => {
@@ -53,7 +53,7 @@ export default function Feed({ counter }) {
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
-                                    {salvo ? <RiSaveFill /> : <RiSaveLine />}
+                                    {el.user.username === userData.username ? <RiEraserFill /> : <></>}
                                 </IconContext.Provider>
                             </ThumbDetails>
                         </div>
