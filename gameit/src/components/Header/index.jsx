@@ -21,6 +21,7 @@ export default function Header({ count }) {
 
     useEffect(() => {
         setUserData(JSON.parse(localStorage.getItem('userInfo')));
+        setshowLogout(false);
     }, [count])
 
     return (

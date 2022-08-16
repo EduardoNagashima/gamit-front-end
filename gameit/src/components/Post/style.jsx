@@ -5,6 +5,19 @@ export const PostSection = styled.section`
     margin: 5% auto;
 `
 
+export const ErrorMessage = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    h5{
+        font-size: 42px;
+        color: white;
+        text-align: center;
+        margin: 20% auto 20px;
+        align-self: center;
+    }
+`
+
 export const PostDiv = styled.div`
     margin: 0 auto;
     background-color: #e4dfdf;

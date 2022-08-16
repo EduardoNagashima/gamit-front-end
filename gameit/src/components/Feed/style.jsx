@@ -8,6 +8,11 @@ export const FeedSection = styled.section`
     width: 70%;
     height: auto;
     margin-bottom: 20px;
+    h1 {
+        font-size: 30px;
+        margin-top: 50px;
+        color: white;
+    }
 `
 
 export const ThumbTittle = styled.h2`

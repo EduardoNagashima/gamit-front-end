@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
-import { PostSection, PostDiv, UserInfoDiv } from "./style.jsx";
+import { PostSection, PostDiv, UserInfoDiv, ErrorMessage } from "./style.jsx";
 import { RiHeartLine, RiHeartFill, RiTimeFill, RiEraserFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 
@@ -35,13 +35,12 @@ export default function Post() {
                 .catch(err => {
                     console.error(err);
                 })
-
         }
     }
 
     return (
         <PostSection>
-            {postInfo.user &&
+            {postInfo.user ?
                 <PostDiv>
                     <UserInfoDiv>
                         <div>
@@ -65,7 +64,10 @@ export default function Post() {
 
                     </div>
                     <h2>{postInfo.content}</h2>
-                </PostDiv>
+                </PostDiv> :
+                <ErrorMessage>
+                    <h5>404 página não encontrada!</h5>
+                </ErrorMessage>
             }
         </PostSection>
     );

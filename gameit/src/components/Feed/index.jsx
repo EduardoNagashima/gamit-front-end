@@ -9,6 +9,7 @@ export default function Feed({ counter }) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState([true]);
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
+    const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const navigate = useNavigate();
     const like = true;
 
@@ -32,6 +33,20 @@ export default function Feed({ counter }) {
         navigate('/post/' + id);
     }
 
+    function deletePost(id) {
+        if (window.confirm('Você tem certeza que quer apagar sua linda publicação?')) {
+            const config = { headers: { "Authorization": `Bearer ${token}` } }
+            api.delete(`/post/${id}`, config)
+                .then(res => {
+                    alert('Publicação excluida com sucesso!');
+                    navigate('/');
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+        }
+    }
+
     return (
         <FeedSection>
             {!loading && posts?.map(el => {
@@ -53,13 +68,14 @@ export default function Feed({ counter }) {
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
-                                    {el.user.username === userData.username ? <RiEraserFill /> : <></>}
+                                    {el.user.username === userData.username ? <RiEraserFill onClick={() => deletePost(el.id)} /> : <></>}
                                 </IconContext.Provider>
                             </ThumbDetails>
                         </div>
                     </PostThumbnail>
                 );
             })}
+            {!posts[0] && <h1>Não há publicaçãoes no momento, faça a primeira!</h1>}
         </FeedSection>
     );
 }
