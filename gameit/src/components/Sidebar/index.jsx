@@ -7,7 +7,7 @@ import { FaEye } from "react-icons/fa";
 
 export default function Sidebar({ counter, setCounter }) {
     const navigate = useNavigate();
-    const [token] = useState(useContext(UserContext).token);
+    const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [mostViews, setMostViews] = useState([]);
     const [postInfos, setPostInfos] = useState({
         tittle: '',
