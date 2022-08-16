@@ -1,7 +1,6 @@
 import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style"
-import { useState, useContext, useEffect } from "react";
+import { useState, useEffect } from "react";
 import api from "../../services/api";
-import UserContext from "../../contexts/UserContext";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 

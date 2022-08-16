@@ -1,10 +1,17 @@
 import { LoginPage } from "./style";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+export default function Login({ count, setCount }) {
     const navigate = useNavigate();
+    const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
+    useEffect(() => {
+        if (token) {
+            navigate('/')
+        }
+    }, []);
+
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: ''
@@ -29,6 +36,7 @@ export default function Login() {
                 const userInfo = { image, username };
                 localStorage.setItem('authorization', JSON.stringify(token));
                 localStorage.setItem('userInfo', JSON.stringify(userInfo));
+                setCount(count + 1);
                 navigate("/");
             }).catch(err => {
                 console.error(err.response.data);
@@ -38,7 +46,6 @@ export default function Login() {
 
     function SignUp(e) {
         e.preventDefault();
-        console.log(signUpInfo)
         api.post('/signup', signUpInfo)
             .then(res => {
                 if (res.status === 201) {

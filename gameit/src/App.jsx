@@ -14,14 +14,15 @@ const App = () => {
 
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userInfo] = useState(JSON.parse(localStorage.getItem('userInfo')));
+    const [count, setCount] = useState(0);
 
     return (
         <BrowserRouter>
             <UserContext.Provider value={{ token, userInfo }}>
-                <Header />
+                <Header count={count} />
                 <Routes>
                     <Route path="/" element={<Home token={token} />} />
-                    <Route path="/login" element={<Login />} />
+                    <Route path="/login" element={<Login count={count} setCount={setCount} />} />
                     <Route path="/post/:id" element={<Post />} />
                 </Routes>
             </UserContext.Provider>
