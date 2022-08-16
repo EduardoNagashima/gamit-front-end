@@ -4,19 +4,17 @@ import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv } from "./style.jsx";
 import { RiHeartLine, RiHeartFill, RiTimeFill, RiEraserFill } from 'react-icons/ri';
+import { useNavigate } from "react-router-dom";
 
 export default function Post() {
     const { id } = useParams();
+    const navigate = useNavigate();
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [postInfo, setPostInfo] = useState({});
 
     useEffect(() => {
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
+        const config = { headers: { "Authorization": `Bearer ${token}` } }
         api.get(`/post/${id}`, config)
             .then(res => {
                 setPostInfo(res.data);
@@ -25,6 +23,21 @@ export default function Post() {
                 console.error(err);
             })
     }, [token]);
+
+    function deletePost() {
+        if (window.confirm('Você tem certeza que quer apagar sua linda publicação?')) {
+            const config = { headers: { "Authorization": `Bearer ${token}` } }
+            api.delete(`/post/${id}`, config)
+                .then(res => {
+                    alert('Publicação excluida com sucesso!');
+                    navigate('/');
+                })
+                .catch(err => {
+                    console.error(err);
+                })
+
+        }
+    }
 
     return (
         <PostSection>
@@ -47,7 +60,7 @@ export default function Post() {
                                 {true ? <RiHeartFill /> : <RiHeartLine />}
                                 <RiTimeFill /> <strong> {postInfo.views} vizualizações </strong>
                             </div>
-                            {postInfo.user.username === userData.username ? <RiEraserFill /> : <></>}
+                            {postInfo.user.username === userData.username ? <RiEraserFill onClick={() => deletePost()} /> : <></>}
                         </IconContext.Provider>
 
                     </div>
