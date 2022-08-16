@@ -6,7 +6,8 @@ export const FeedSection = styled.section`
     flex-direction: column;
     align-items: center;
     width: 70%;
-    height: 100rem;
+    height: auto;
+    margin-bottom: 20px;
 `
 
 export const ThumbTittle = styled.h2`
@@ -24,7 +25,7 @@ export const PostThumbnail = styled.div`
 
     background: #2C343A;
     border-radius: 16px;
-    margin-bottom: 2rem;
+    margin-bottom: 20px;
     margin-top: 2rem;
 `
 

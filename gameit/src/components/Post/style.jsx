@@ -13,7 +13,7 @@ export const PostDiv = styled.div`
     max-width: 1090px;
     min-width: 1000px;
     height: auto;
-    
+
     img {
         width: 100%;
         margin-right: 10px;
