@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Login from "./components/Login";
 import Home from "./components/Home";
 import Post from "./components/Post";
+import Jaba from "./components/Jaba";
 
 import "./assets/styles/reset.css";
 import "./assets/styles/style.css";
@@ -26,6 +27,7 @@ const App = () => {
                     <Route path="/post/:id" element={<Post />} />
                 </Routes>
             </UserContext.Provider>
+            <Jaba />
         </BrowserRouter>
     );
 }
