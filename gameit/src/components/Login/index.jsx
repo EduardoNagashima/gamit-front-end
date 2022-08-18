@@ -2,6 +2,8 @@ import { LoginPage } from "./style";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
+import { RiLockPasswordFill, RiUser3Fill } from "react-icons/ri";
+import { IconContext } from "react-icons/lib";
 
 export default function Login({ count, setCount }) {
     const navigate = useNavigate();
@@ -62,10 +64,24 @@ export default function Login({ count, setCount }) {
         <LoginPage>
             <div>
                 {toggleLogin && <form onSubmit={LoginAuth}>
-                    <p>Email:</p>
-                    <input type="email" onChange={e => setUserInfo({ ...userInfo, email: e.target.value })} />
-                    <p>Password:</p>
-                    <input type="password" onChange={e => setUserInfo({ ...userInfo, password: e.target.value })} />
+                    <IconContext.Provider value={{ color: "white", style: { fontSize: '42px', marginRight: '10px' } }}>
+                        <div>
+                            <RiUser3Fill />
+                            <input
+                                placeholder="E-mail"
+                                requiredform__field
+                                type="email"
+                                onChange={e => setUserInfo({ ...userInfo, email: e.target.value })} />
+                        </div>
+                        <div>
+                            <RiLockPasswordFill />
+                            <input
+                                type="password"
+                                required
+                                placeholder="Password"
+                                onChange={e => setUserInfo({ ...userInfo, password: e.target.value })} />
+                        </div>
+                    </IconContext.Provider>
                     <button>Login</button>
                 </form>}
                 {!toggleLogin && <form onSubmit={SignUp}>
@@ -82,8 +98,8 @@ export default function Login({ count, setCount }) {
                     <button>Create Account</button>
                 </form>}
             </div>
-            {toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Não tem uma conta? Clique Aqui!</h3>}
-            {!toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Já tem uma conta? Clique Aqui!</h3>}
+            {toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Não tem uma conta? <b>Clique Aqui!</b></h3>}
+            {!toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Já tem uma conta? <b>Clique Aqui!</b></h3>}
 
         </LoginPage>
     );

@@ -6,7 +6,7 @@ export const LoginPage = styled.section`
     justify-content: center;
     flex-direction: column;
     border-radius: 20px;
-    background-color: #a9a9ad;
+    background-color: #2C343A;
     margin: 10% auto;
     width: 100%;
     max-width: 500px;
@@ -19,19 +19,23 @@ export const LoginPage = styled.section`
         padding: 20px;
         justify-content: center;
         input {
+            background-color: #2C343A;
+            color: #95999C;
             border: none;
+            border-bottom: 2px #95999C solid ;
+            :focus {
+                outline: none;
+            }
             height: auto;
             padding: 10px;
-            width: 100%;
-            font-size: 20px;
-            border-radius: 3px;
-            box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+            font-size: 30px;
             margin-bottom: 10px;
             width: 98%;
         }
         p { 
             font-size: 24px;
             margin-bottom: 3px;
+            color: #95999C;
         }
         button {
             color: #323138;
@@ -55,6 +59,7 @@ export const LoginPage = styled.section`
     h3 {
         font-family: 'Roboto', sans-serif;
         font-size: 20px;
+        color: #95999C;
         font-weight: 400;
         margin-bottom: 10px;
         cursor: pointer;
