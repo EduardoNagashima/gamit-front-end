@@ -77,7 +77,7 @@ export default function Feed({ counter, setCounter }) {
                                 <IconContext.Provider value={{ color: "white", size: '30px' }}>
                                     <div>
                                         {el.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
-                                        {el._count.Like === 0 ? <small>nenhuma pessoas curtiu isso :( , seja a primeira!</small> : <h2>{el._count.Like + ' curtida(s)!'}</h2>}
+                                        {el._count.Like === 0 ? <h2>nenhuma pessoas curtiu isso :( , seja a primeira!</h2> : <h2>{el._count.Like + ' curtida(s)!'}</h2>}
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
