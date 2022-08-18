@@ -21,6 +21,7 @@ const MeDaUmEmprego = styled.div`
     h4 {
         padding: 10px;
         font-size: 15px;
+        
     }
     a {
         font-size: 17px;

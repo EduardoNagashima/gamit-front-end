@@ -1,9 +1,9 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiEraserFill, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
+import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
 
 export default function Feed({ counter }) {
     const [posts, setPosts] = useState([]);
@@ -11,7 +11,6 @@ export default function Feed({ counter }) {
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const navigate = useNavigate();
-    const like = true;
 
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('authorization'));
@@ -47,16 +46,27 @@ export default function Feed({ counter }) {
         }
     }
 
+    function like(postId) {
+        const config = { headers: { "Authorization": `Bearer ${token}` } }
+        api.post('/like', { postId }, config)
+            .then(res => {
+                console.log(res);
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    }
+
     return (
         <FeedSection>
             {!loading && posts?.map(el => {
                 return (
-                    <PostThumbnail key={el.id} onClick={() => { goToPage(el.id) }}>
-                        <ImgDiv>
+                    <PostThumbnail key={el.id}>
+                        <ImgDiv onClick={() => { goToPage(el.id) }}>
                             <img src={el.coverImg} alt="cover" />
                         </ImgDiv>
                         <div>
-                            <ThumbTittle>{el.tittle}</ThumbTittle>
+                            <ThumbTittle onClick={() => { goToPage(el.id) }}>{el.tittle}</ThumbTittle>
                             <ThumbUserDiv>
                                 <img src={el.user.image} alt="" />
                                 <p>{el.user.username}</p>
@@ -64,7 +74,7 @@ export default function Feed({ counter }) {
                             <ThumbDetails>
                                 <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
                                     <div>
-                                        {like ? <RiHeartFill /> : <RiHeartLine />}
+                                        {true ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
@@ -76,6 +86,6 @@ export default function Feed({ counter }) {
                 );
             })}
             {!posts[0] && <h1>Não há publicaçãoes no momento, faça a primeira!</h1>}
-        </FeedSection>
+        </FeedSection >
     );
 }
