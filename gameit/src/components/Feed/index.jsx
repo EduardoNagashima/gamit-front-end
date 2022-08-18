@@ -5,7 +5,7 @@ import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 
-export default function Feed({ counter }) {
+export default function Feed({ counter, setCounter }) {
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState([true]);
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
@@ -74,7 +74,10 @@ export default function Feed({ counter }) {
                             <ThumbDetails>
                                 <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
                                     <div>
-                                        {true ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
+                                        {console.log(el.Like)}
+                                        {console.log(userData.username)}
+                                        {el.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
+                                        <small>{el.Like[0]?.user.username + ' e outras ' + el._count.Like + ' curtiu isso'}</small>
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>

@@ -1,13 +1,15 @@
 import axios from "axios";
 
-//MUDAR ISSO NA HORA DO DEPLOYs
+let api;
 
-// const api = axios.create({
-//     baseURL: "http://localhost:5000",
-// });
-
-const api = axios.create({
-    baseURL: "https://gameit-backend-deploy.herokuapp.com/",
-});
+if (false) {
+    api = axios.create({
+        baseURL: "http://localhost:5000",
+    });
+} else {
+    api = axios.create({
+        baseURL: "https://gameit-backend-deploy.herokuapp.com/",
+    });
+}
 
 export default api;
