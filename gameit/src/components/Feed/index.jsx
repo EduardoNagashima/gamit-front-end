@@ -38,6 +38,7 @@ export default function Feed({ counter, setCounter }) {
             api.delete(`/post/${id}`, config)
                 .then(res => {
                     alert('Publicação excluida com sucesso!');
+
                     navigate('/');
                 })
                 .catch(err => {
@@ -51,6 +52,7 @@ export default function Feed({ counter, setCounter }) {
         api.post('/like', { postId }, config)
             .then(res => {
                 console.log(res);
+                setCounter(counter + 1);
             })
             .catch(err => {
                 console.error(err);
@@ -72,12 +74,10 @@ export default function Feed({ counter, setCounter }) {
                                 <p>{el.user.username}</p>
                             </ThumbUserDiv>
                             <ThumbDetails>
-                                <IconContext.Provider value={{ color: "white", style: { fontSize: '1.3rem' } }}>
+                                <IconContext.Provider value={{ color: "white", size: '30px' }}>
                                     <div>
-                                        {console.log(el.Like)}
-                                        {console.log(userData.username)}
                                         {el.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
-                                        <small>{el.Like[0]?.user.username + ' e outras ' + el._count.Like + ' curtiu isso'}</small>
+                                        {el._count.Like === 0 ? <small>nenhuma pessoas curtiu isso :( , seja a primeira!</small> : <h2>{el._count.Like + ' curtida(s)!'}</h2>}
                                         <RiTimeFill /> <p> {el.views} vizualizações </p>
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>

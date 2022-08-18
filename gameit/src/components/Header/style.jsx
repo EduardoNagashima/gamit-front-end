@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderSection = styled.header`
-z-index: 2;
+    z-index: 2;
     position: fixed;
     display: flex;
     align-items: center;
@@ -38,6 +38,7 @@ export const UserDiv = styled.div`
         width: 50px;
         height: 50px;
         border-radius: 50px;
+        padding: 5px;
     }
     h2 {
         color: white;

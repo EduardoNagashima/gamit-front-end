@@ -21,7 +21,7 @@ export const ThumbTittle = styled.h2`
     font-weight: 700;
     text-align: left;
     font-size: 30px;
-    padding: 10px;
+    padding: 20px;
 `
 
 export const PostThumbnail = styled.div`
@@ -32,13 +32,14 @@ export const PostThumbnail = styled.div`
     border-radius: 16px;
     margin-bottom: 20px;
     margin-top: 2rem;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
 `
 
 export const ThumbUserDiv = styled.div`
     display: flex;
     align-items: center;
     gap: 1rem;
-    padding: 10px;
+    padding-left: 20px;
     img {
         width: 40px;
         height: 40px;
@@ -66,12 +67,15 @@ export const ThumbDetails = styled.div`
     align-items: center;
     width: auto;
     padding: 10px;
-    justify-content: space-between;
-    
+    h2 {
+        color: #95999C;
+    }
     div {
+        padding: 10px;
+        width: 100%;
         display: flex;
-        gap: 1rem;
-        align-items: flex-end;
+        align-items: center;
+        gap: 10px;
         p {
             font-family: 'Roboto', sans-serif;
             font-weight: 400;
@@ -84,8 +88,9 @@ export const ThumbDetails = styled.div`
         font-size: 15px;
         color: #95999C;
         font-weight: 400;
-        text-align: center;
         justify-self: center;
         align-self: center;
+        flex-grow: 2;
+        text-align: right;
     }
 `

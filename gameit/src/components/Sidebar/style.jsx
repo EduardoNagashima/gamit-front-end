@@ -81,31 +81,36 @@ export const MostViewContainer = styled.div`
 
 export const UserContainer = styled.div`
     display: flex;
-    align-items: center;
-    width: 100%;
     padding: 10px;
     height: auto;
-    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    justify-content: baseline;
     div{
         display: flex;
-        flex-direction: row;
+        width: 100px;
+        flex-direction: column;
         align-items: center;
         justify-content: flex-start;
-        gap: 1rem;
         img {
             object-fit: cover;
             width: 50px;
             height: 50px;
             border-radius: 50px;
+            margin-bottom: 2px;
         }
         h2 {
-            font-size: 14px;
+            font-size: 12px;
             color: #d3d6d8;
+            word-break: keep-all;
         }
     }
     small {
-        font-size: 20px;
+        font-size: 18px;
         color: #d3d6d8;
+        text-align: left;
+        flex-grow: 2;
+        word-break: break-all;
         font-family: 'Roboto', sans-serif;
     }
     h3 {
@@ -113,6 +118,6 @@ export const UserContainer = styled.div`
         align-items: center;
         justify-content: center;
         color: #d3d6d8;
-        font-size: 20px;
+        font-size: 18px;
     }
 `

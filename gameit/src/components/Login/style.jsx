@@ -30,7 +30,7 @@ export const LoginPage = styled.section`
             padding: 10px;
             font-size: 30px;
             margin-bottom: 10px;
-            width: 98%;
+            width: 100%;
         }
         p { 
             font-size: 24px;
