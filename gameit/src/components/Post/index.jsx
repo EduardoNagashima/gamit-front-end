@@ -2,7 +2,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
-import { PostSection, PostDiv, UserInfoDiv, ErrorMessage } from "./style.jsx";
+import { PostSection, PostDiv, UserInfoDiv, ErrorMessage, ContentText } from "./style.jsx";
 import { RiHeartLine, RiHeartFill, RiEyeFill, RiEraserFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/index.jsx";
@@ -43,6 +43,17 @@ export default function Post() {
         }
     }
 
+    function like(postId) {
+        const config = { headers: { "Authorization": `Bearer ${token}` } }
+        api.post('/like', { postId }, config)
+            .then(res => {
+                window.location.reload();
+            })
+            .catch(err => {
+                console.error(err);
+            })
+    }
+
     return (
         <PostSection>
             {!loading && postInfo.user ?
@@ -59,16 +70,17 @@ export default function Post() {
                     <img src={postInfo.coverImg} alt="cover" />
                     <p>{postInfo.tittle}</p>
                     <div>
-                        <IconContext.Provider value={{ color: "black", style: { fontSize: '42px', marginRight: '12px' } }}>
+                        <IconContext.Provider value={{ color: "black", style: { fontSize: '42px', cursor: "pointer" } }}>
                             <div>
-                                {true ? <RiHeartFill /> : <RiHeartLine />}
+                                {postInfo.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(postInfo.id)} /> : <RiHeartLine onClick={() => like(postInfo.id)} />}
+                                {postInfo._count.Like === 0 ? <h2>nenhuma pessoas curtiu isso :( </h2> : <h2>{postInfo._count.Like + ' curtida(s)!'}</h2>}
                                 <RiEyeFill /> <strong> {postInfo.views} vizualizações </strong>
                             </div>
                             {postInfo.user.username === userData.username ? <RiEraserFill onClick={() => deletePost()} /> : <></>}
                         </IconContext.Provider>
 
                     </div>
-                    <h2>{postInfo.content}</h2>
+                    <ContentText>{postInfo.content}</ContentText>
                 </PostDiv> : <Loading />
             }
 

@@ -24,7 +24,7 @@ const App = () => {
                 <Routes>
                     <Route path="/" element={<Home token={token} />} />
                     <Route path="/login" element={<Login count={count} setCount={setCount} />} />
-                    <Route path="/post/:id" element={<Post />} />
+                    <Route path="/post/:id" element={<Post setCount={() => setCount(count + 1)} />} />
                 </Routes>
             </UserContext.Provider>
             <Jaba />

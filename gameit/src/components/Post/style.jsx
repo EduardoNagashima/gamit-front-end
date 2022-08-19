@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const PostSection = styled.section`
     width: 90%;
-    margin: 10% auto;
+    margin: 100px auto;
 `
 
 export const ErrorMessage = styled.div`
@@ -45,7 +45,7 @@ export const PostDiv = styled.div`
         and (max-device-width: 450px) 
         and (min-device-width: 0px) 
         { 
-            font-size: 12px;
+            font-size: 25px;
         }
     }
     div {
@@ -56,14 +56,21 @@ export const PostDiv = styled.div`
         justify-content: space-between;
         div {
             strong {
-                font-size: 18px;
+                font-size: 20px;
+                margin-left: 5px;
                 @media screen 
-                and (max-device-width: 450px) 
+                and (max-device-width: 900px) 
                 and (min-device-width: 0px) 
                 { 
                     font-size: 12px;
                 }
             }
+        }
+        @media screen 
+        and (max-device-width: 900px) 
+        and (min-device-width: 0px) 
+        { 
+            padding: 5px;
         }
     }
     h2 {
@@ -71,8 +78,30 @@ export const PostDiv = styled.div`
         font-family: 'Roboto', sans-serif;
         font-size: 35px;
         font-weight: 400;
+        @media screen 
+        and (max-device-width: 900px) 
+        and (min-device-width: 0px) 
+        {   
+         
+            font-size: 30px;
+        
+        }
     }
     
+`
+
+export const ContentText = styled.h4`
+    font-size: 42px;
+    padding: 20px;
+    font-family: 'Roboto', sans-serif;
+    @media screen 
+    and (max-device-width: 900px) 
+    and (min-device-width: 0px) 
+    {   
+        
+        font-size: 30px;
+    
+    }
 `
 
 export const UserInfoDiv = styled.div`

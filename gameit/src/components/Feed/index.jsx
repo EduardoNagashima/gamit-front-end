@@ -1,4 +1,4 @@
-import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
+import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ContentText, ImgDiv, ThumbDetails } from "./style";
 import { RiEraserFill, RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
@@ -52,7 +52,6 @@ export default function Feed({ counter, setCounter }) {
         const config = { headers: { "Authorization": `Bearer ${token}` } }
         api.post('/like', { postId }, config)
             .then(res => {
-                console.log(res);
                 setCounter(counter + 1);
             })
             .catch(err => {
