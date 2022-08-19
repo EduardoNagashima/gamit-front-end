@@ -13,6 +13,14 @@ export const FeedSection = styled.section`
         margin-top: 50px;
         color: white;
     }
+    @media screen 
+    and (max-device-width: 1400px) 
+    and (min-device-width: 0px) 
+    { 
+        width: 100%;
+        margin: 0px auto;
+        max-width: 1000px;
+    }
 `
 
 export const ThumbTittle = styled.h2`
@@ -33,6 +41,14 @@ export const PostThumbnail = styled.div`
     margin-bottom: 20px;
     margin-top: 2rem;
     box-shadow: rgba(17, 17, 26, 0.1) 0px 1px 0px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 48px;
+    @media screen 
+    and (max-device-width: 800px) 
+    and (min-device-width: 0px) 
+    { 
+        width: 100%;
+        margin: 20px auto;
+        max-width: 420px;
+    }
 `
 
 export const ThumbUserDiv = styled.div`
@@ -50,6 +66,20 @@ export const ThumbUserDiv = styled.div`
         color: white;
         font-size: 18px;
     }
+    @media screen 
+    and (max-device-width: 800px) 
+    and (min-device-width: 0px) 
+    { 
+        width: 100%;
+        margin: 0px auto;
+        max-width: 420px;
+        img {
+            max-width: 420px;
+        }
+        p {
+            font-size: 12px;
+        }
+    }
 `
 
 export const ImgDiv = styled.div`
@@ -58,6 +88,14 @@ export const ImgDiv = styled.div`
         width: 100%;
         height: 100%;
         object-fit: cover;
+    }
+    @media screen 
+    and (max-device-width: 800px) 
+    and (min-device-width: 0px) 
+    { 
+      img {
+        max-width: 420px;
+      }
     }
 
 `
@@ -68,18 +106,19 @@ export const ThumbDetails = styled.div`
     width: auto;
     padding: 10px;
     h2 {
+        font-size: 20px;
         color: #95999C;
     }
     div {
-        padding: 10px;
+        padding: 5px;
         width: 100%;
         display: flex;
         align-items: center;
         gap: 10px;
         p {
             font-family: 'Roboto', sans-serif;
-            font-weight: 400;
-            font-size: 15px;
+            font-weight: 700;
+            font-size: 20px;
             line-height: 19px;
             color: #95999C;
         }
@@ -92,5 +131,22 @@ export const ThumbDetails = styled.div`
         align-self: center;
         flex-grow: 2;
         text-align: right;
+    }
+    @media screen 
+    and (max-device-width: 1400px) 
+    and (min-device-width: 0px) 
+    { 
+        h2 {
+            font-size: 13px;
+        }
+        small {
+            font-size: 12px;
+        }
+        div {
+            gap: 5px;
+            p {
+                font-size: 12px;
+            }
+        }
     }
 `

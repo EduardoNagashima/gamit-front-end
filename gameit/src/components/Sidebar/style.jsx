@@ -7,6 +7,12 @@ export const SidebarSection = styled.section`
     flex-direction: column;
     justify-content: flex-start;
     width: 30%;
+    @media screen 
+    and (max-device-width: 1400px) 
+    and (min-device-width: 0px) 
+    {   margin: 0 auto;
+        width: 100%;
+    }
 `
 
 export const PostCreationContainer = styled.div`
@@ -56,6 +62,17 @@ export const PostCreationContainer = styled.div`
         &:hover {
             background-color: #1f2529;
         }
+    @media screen 
+    and (max-device-width: 800px) 
+    and (min-device-width: 0px) 
+    { 
+        position: fixed;
+        display: block;
+        padding: 0;
+        margin: 0;
+        top: 0;
+        right: 0;
+    }
     }
 `
 
@@ -76,6 +93,13 @@ export const MostViewContainer = styled.div`
         color: #d3d6d8;
         font-weight: 700;
         font-size: 42px;
+    }
+    @media screen 
+    and (max-device-width: 1400px) 
+    and (min-device-width: 0px) 
+    { 
+        display: block;
+        width: 100%;
     }
 `
 

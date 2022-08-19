@@ -11,6 +11,12 @@ export const HeaderSection = styled.header`
     width: 100%;
     background-color: #1c232b;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    @media screen 
+    and (max-device-width: 1400px) 
+    and (min-device-width: 0px) 
+    { 
+       min-width: 400px;
+    }
 `
 
 export const HeaderContent = styled.section`
@@ -21,6 +27,7 @@ export const HeaderContent = styled.section`
 `
 
 export const HeaderDiv = styled.div`
+    cursor: pointer;
     h1{
         font-size: 2rem;
         color: white;
@@ -82,5 +89,14 @@ export const LogoutDiv = styled.div`
         z-index: 3;
         padding: 40px;
         margin-right: 10px;
+    }
+    @media screen 
+    and (max-device-width: 800px) 
+    and (min-device-width: 0px) 
+    { 
+        width: 100px;
+      span {
+        font-size: 12px;
+      }
     }
 `

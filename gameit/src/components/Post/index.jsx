@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv, ErrorMessage } from "./style.jsx";
-import { RiHeartLine, RiHeartFill, RiTimeFill, RiEraserFill } from 'react-icons/ri';
+import { RiHeartLine, RiHeartFill, RiEyeFill, RiEraserFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
+import Loading from "../Loading/index.jsx";
 
 export default function Post() {
     const { id } = useParams();
@@ -12,6 +13,7 @@ export default function Post() {
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [postInfo, setPostInfo] = useState({});
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         const config = { headers: { "Authorization": `Bearer ${token}` } }
@@ -21,6 +23,9 @@ export default function Post() {
             })
             .catch(err => {
                 console.error(err);
+            })
+            .finally(() => {
+                setLoading(false);
             })
     }, [token]);
 
@@ -40,7 +45,7 @@ export default function Post() {
 
     return (
         <PostSection>
-            {postInfo.user ?
+            {!loading && postInfo.user ?
                 <PostDiv>
                     <UserInfoDiv>
                         <div>
@@ -54,21 +59,24 @@ export default function Post() {
                     <img src={postInfo.coverImg} alt="cover" />
                     <p>{postInfo.tittle}</p>
                     <div>
-                        <IconContext.Provider value={{ color: "black", style: { fontSize: '70px' } }}>
+                        <IconContext.Provider value={{ color: "black", style: { fontSize: '42px', marginRight: '12px' } }}>
                             <div>
                                 {true ? <RiHeartFill /> : <RiHeartLine />}
-                                <RiTimeFill /> <strong> {postInfo.views} vizualizações </strong>
+                                <RiEyeFill /> <strong> {postInfo.views} vizualizações </strong>
                             </div>
                             {postInfo.user.username === userData.username ? <RiEraserFill onClick={() => deletePost()} /> : <></>}
                         </IconContext.Provider>
 
                     </div>
                     <h2>{postInfo.content}</h2>
-                </PostDiv> :
+                </PostDiv> : <Loading />
+            }
+
+            {!postInfo.user && !loading &&
                 <ErrorMessage>
                     <h5>404 página não encontrada!</h5>
-                </ErrorMessage>
-            }
+                </ErrorMessage>}
+
         </PostSection>
     );
 }

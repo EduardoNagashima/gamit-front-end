@@ -1,13 +1,14 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
-import { RiEraserFill, RiHeartLine, RiHeartFill, RiTimeFill } from 'react-icons/ri';
+import { RiEraserFill, RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
+import Loading from "../Loading";
 
 export default function Feed({ counter, setCounter }) {
     const [posts, setPosts] = useState([]);
-    const [loading, setLoading] = useState([true]);
+    const [loading, setLoading] = useState(true);
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const navigate = useNavigate();
@@ -74,11 +75,13 @@ export default function Feed({ counter, setCounter }) {
                                 <p>{el.user.username}</p>
                             </ThumbUserDiv>
                             <ThumbDetails>
-                                <IconContext.Provider value={{ color: "white", size: '30px' }}>
+                                <IconContext.Provider value={{ color: "white", size: '40px', style: { cursor: "pointer" } }}>
                                     <div>
-                                        {el.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
-                                        {el._count.Like === 0 ? <h2>nenhuma pessoas curtiu isso :( , seja a primeira!</h2> : <h2>{el._count.Like + ' curtida(s)!'}</h2>}
-                                        <RiTimeFill /> <p> {el.views} vizualizações </p>
+                                        <div>
+                                            {el.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(el.id)} /> : <RiHeartLine onClick={() => like(el.id)} />}
+                                            {el._count.Like === 0 ? <h2>nenhuma pessoas curtiu isso :( </h2> : <h2>{el._count.Like + ' curtida(s)!'}</h2>}
+                                        </div>
+                                        <p> {el.views} </p><RiEyeFill style={{ minWidth: '24px' }} />
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
                                     {el.user.username === userData.username ? <RiEraserFill onClick={() => deletePost(el.id)} /> : <></>}
@@ -88,7 +91,8 @@ export default function Feed({ counter, setCounter }) {
                     </PostThumbnail>
                 );
             })}
-            {!posts[0] && <h1>Não há publicaçãoes no momento, faça a primeira!</h1>}
+            {!posts[0] && !loading && <h1>Não há publicaçãoes no momento, faça a primeira!</h1>}
+            {loading && <Loading />}
         </FeedSection >
     );
 }
