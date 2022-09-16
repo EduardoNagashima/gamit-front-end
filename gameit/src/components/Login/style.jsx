@@ -64,5 +64,4 @@ export const LoginPage = styled.section`
         margin-bottom: 10px;
         cursor: pointer;
     }
-
 `

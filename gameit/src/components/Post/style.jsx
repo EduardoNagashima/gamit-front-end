@@ -19,6 +19,7 @@ export const ErrorMessage = styled.div`
 `
 
 export const PostDiv = styled.div`
+    cursor: pointer;
     margin: 0 auto;
     background-color: #e4dfdf;
     border-radius: 10px;

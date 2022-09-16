@@ -2,14 +2,8 @@ import axios from "axios";
 
 let api;
 
-if (false) {
-    api = axios.create({
-        baseURL: "http://localhost:5000",
-    });
-} else {
-    api = axios.create({
-        baseURL: "https://gameit-backend-deploy.herokuapp.com/",
-    });
-}
+api = axios.create({
+    baseURL: process.env.REACT_APP_DATABASE,
+});
 
 export default api;

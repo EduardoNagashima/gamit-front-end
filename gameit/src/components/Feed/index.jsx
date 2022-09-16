@@ -1,10 +1,11 @@
-import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ContentText, ImgDiv, ThumbDetails } from "./style";
+import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiEraserFill, RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import Loading from "../Loading";
+import { toast } from "react-toastify";
 
 export default function Feed({ counter, setCounter }) {
     const [posts, setPosts] = useState([]);
@@ -38,8 +39,7 @@ export default function Feed({ counter, setCounter }) {
             const config = { headers: { "Authorization": `Bearer ${token}` } }
             api.delete(`/post/${id}`, config)
                 .then(res => {
-                    alert('Publicação excluida com sucesso!');
-
+                    toast.success('Publicação excluida com sucesso!');
                     navigate('/');
                 })
                 .catch(err => {

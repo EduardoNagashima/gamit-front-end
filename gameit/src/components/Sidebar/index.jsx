@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
+import Notify from "../Notify";
+import { toast } from "react-toastify";
 
 export default function Sidebar({ counter, setCounter }) {
     const navigate = useNavigate();
@@ -18,16 +20,14 @@ export default function Sidebar({ counter, setCounter }) {
         e.preventDefault();
         const { tittle, coverImg, content } = postInfos;
         if (!tittle || !content) {
-            alert('Campos vazios!');
+            toast.warn('Campos vazios!');
             return;
         }
-
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
         }
-
         const body = {
             tittle,
             coverImg,
@@ -41,13 +41,13 @@ export default function Sidebar({ counter, setCounter }) {
                     coverImg: '',
                     content: ''
                 });
-                alert('Postagem criada com sucesso!');
+                toast.success('Postagem criada com sucesso!');
                 setCounter(counter + 1);
             })
             .catch(err => {
-                console.log(err.response.data)
+                toast.error(err.response.data);
                 if (err.response.data[0].context.label === 'coverImg') {
-                    alert('ERRO!!! Coloque uma imagem de fundo válida: -COMEÇAR COM http(s)://... -TERMINAR COM (.png, .jpg, .jpeg, .gif, .png, .svg)')
+                    toast.warn('Coloque uma imagem de fundo válida: http(s)://...(.png, .jpg, .jpeg, .gif, .png, .svg)')
                 }
             });
     }
@@ -72,6 +72,7 @@ export default function Sidebar({ counter, setCounter }) {
 
     return (
         <SidebarSection>
+            <Notify/>
             <PostCreationContainer>
                 <form onSubmit={postPost}>
                     <p>Create Post</p>

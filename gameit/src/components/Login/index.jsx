@@ -4,6 +4,8 @@ import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { RiLockPasswordFill, RiUser3Fill } from "react-icons/ri";
 import { IconContext } from "react-icons/lib";
+import Notify from "../Notify";
+import { toast } from "react-toastify";
 
 export default function Login({ count, setCount }) {
     const navigate = useNavigate();
@@ -12,24 +14,18 @@ export default function Login({ count, setCount }) {
         if (token) {
             navigate('/')
         }
-    }, []);
+    });
 
     const [userInfo, setUserInfo] = useState({
         email: '',
         password: ''
     });
-    const [signUpInfo, setSignUpInfo] = useState({
-        email: 'eduyudji3@hotmail.com',
-        password: '123',
-        confirmPassword: '123',
-        username: 'nagashi',
-        image: ''
-    });
+    const [signUpInfo, setSignUpInfo] = useState({});
     const [toggleLogin, setToggleLogin] = useState(true);
     function LoginAuth(e) {
         e.preventDefault();
         if (!userInfo.email || !userInfo.password) {
-            alert('Preencha todos os campos!')
+            toast.warn('Preencha todos os campos!')
             return;
         }
         api.post('/signin', userInfo)
@@ -41,8 +37,7 @@ export default function Login({ count, setCount }) {
                 setCount(count + 1);
                 navigate("/");
             }).catch(err => {
-                console.error(err.response.data);
-                alert(err.response.data)
+                toast.error(err.response.data);
             })
     }
 
@@ -51,16 +46,19 @@ export default function Login({ count, setCount }) {
         api.post('/signup', signUpInfo)
             .then(res => {
                 if (res.status === 201) {
-                    alert('Conta criada com sucesso!');
+                    toast.success('Conta criada com sucesso!');
                     setToggleLogin(!toggleLogin);
                 }
             })
             .catch(err => {
-                console.error(err.response.data);
+                toast.error(err);
+                console.error(err);
             })
     }
 
     return (
+        <>
+        <Notify/>
         <LoginPage>
             <div>
                 {toggleLogin && <form onSubmit={LoginAuth}>
@@ -100,7 +98,7 @@ export default function Login({ count, setCount }) {
             </div>
             {toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Não tem uma conta? <b>Clique Aqui!</b></h3>}
             {!toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Já tem uma conta? <b>Clique Aqui!</b></h3>}
-
         </LoginPage>
+        </>
     );
 }
