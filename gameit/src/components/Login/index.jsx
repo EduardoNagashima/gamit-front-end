@@ -1,4 +1,4 @@
-import { LoginPage } from "./style";
+import { LoginPage,LoginForm } from "./style";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
@@ -60,7 +60,7 @@ export default function Login({ count, setCount }) {
         <>
         <Notify/>
         <LoginPage>
-            <div>
+            <LoginForm>
                 {toggleLogin && <form onSubmit={LoginAuth}>
                     <IconContext.Provider value={{ color: "white", style: { fontSize: '42px', marginRight: '10px' } }}>
                         <div>
@@ -95,7 +95,7 @@ export default function Login({ count, setCount }) {
                     <input required type="password" onChange={e => setSignUpInfo({ ...signUpInfo, confirmPassword: e.target.value })} />
                     <button>Create Account</button>
                 </form>}
-            </div>
+            </LoginForm>
             {toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Não tem uma conta? <b>Clique Aqui!</b></h3>}
             {!toggleLogin && <h3 onClick={() => setToggleLogin(!toggleLogin)}>Já tem uma conta? <b>Clique Aqui!</b></h3>}
         </LoginPage>

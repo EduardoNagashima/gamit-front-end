@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const PostSection = styled.section`
     width: 90%;
     margin: 100px auto;
+    height: 100vh;
 `
 
 export const ErrorMessage = styled.div`

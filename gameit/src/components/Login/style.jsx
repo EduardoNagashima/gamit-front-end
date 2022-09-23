@@ -4,20 +4,41 @@ export const LoginPage = styled.section`
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 20px;
     flex-direction: column;
-    border-radius: 20px;
-    background-color: #2C343A;
-    margin: 10% auto;
     width: 100%;
-    max-width: 500px;
-    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-    div {
-        height: 100%;
+    height: calc(100vh - 4rem);
+    h3 {
+        font-family: 'Roboto', sans-serif;
+        font-size: 20px;
+        color: #95999C;
+        font-weight: 400;
+        margin-bottom: 10px;
+        cursor: pointer;
+    }
+`
+
+export const LoginForm = styled.div`
+        background-color: #2C343A;
+        border-radius: 20px;
+        margin: 0 auto;
+        width: 100%;
+        max-width: 500px;
         width: 100%;
         display: flex;
         align-items: center;
         padding: 20px;
         justify-content: center;
+        form {
+            display: flex;
+            flex-direction: column;
+            div {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 5px;
+            }
+        }
         input {
             background-color: #2C343A;
             color: #95999C;
@@ -55,13 +76,4 @@ export const LoginPage = styled.section`
                 transform: translateY(1px);
             }
         }
-    }
-    h3 {
-        font-family: 'Roboto', sans-serif;
-        font-size: 20px;
-        color: #95999C;
-        font-weight: 400;
-        margin-bottom: 10px;
-        cursor: pointer;
-    }
 `

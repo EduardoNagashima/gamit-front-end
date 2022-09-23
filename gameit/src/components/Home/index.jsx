@@ -14,7 +14,7 @@ export default function Home() {
         if (!token) {
             navigate('/login');
         }
-    }, []);
+    });
 
     return (
         <HomeSection>

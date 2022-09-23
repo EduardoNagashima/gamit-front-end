@@ -36,7 +36,8 @@ export const PostThumbnail = styled.div`
     width: 100%;
     height: auto;
 
-    background: #2C343A;
+    background: rgb(47,65,78);
+    background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
     border-radius: 16px;
     margin-bottom: 20px;
     margin-top: 2rem;

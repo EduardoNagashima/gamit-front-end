@@ -25,7 +25,8 @@ export const PostCreationContainer = styled.div`
     margin-top: 2rem;
     align-items: center;
     width: 100%;
-    background-color: #2C343A;
+    background: rgb(47,65,78);
+background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
     p {
             padding: 10px;
             font-weight: 700;
@@ -88,7 +89,8 @@ export const MostViewContainer = styled.div`
     border-radius: 16px;
     margin-top: 2rem;
     align-items: center;
-    background-color: #2C343A;
+    background: rgb(47,65,78);
+background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
     p {
         color: #d3d6d8;
         font-weight: 700;

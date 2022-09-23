@@ -8,8 +8,8 @@
 body {
     width: 100%;
     margin-top: 4rem;
-    height: auto;
-    background-color: #1c232b;
     font-family: 'Silkscreen', cursive;
     font-weight: 400;
+    background-color: rgb(28, 35, 43);
+    background-color: linear-gradient(180deg, rgba(28, 35, 43, 1) 0%, rgba(26, 15, 73, 1) 100%);
 }
