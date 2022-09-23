@@ -41,7 +41,7 @@ export const PostDiv = styled.div`
         border-radius: 10px;
     }
     p {
-        font-size: 42px;
+        font-size: 38px;
         text-align: center;
         @media screen 
         and (max-device-width: 450px) 
@@ -51,7 +51,7 @@ export const PostDiv = styled.div`
         }
     }
     div {
-        padding: 10px;
+        padding: 5px;
         display: flex;
         flex-direction: row;
         align-items: center;
@@ -76,9 +76,9 @@ export const PostDiv = styled.div`
         }
     }
     h2 {
-        padding: 20px;
+        padding: 15px;
         font-family: 'Roboto', sans-serif;
-        font-size: 35px;
+        font-size: 30px;
         font-weight: 400;
         @media screen 
         and (max-device-width: 900px) 
@@ -92,17 +92,21 @@ export const PostDiv = styled.div`
     
 `
 
-export const ContentText = styled.h4`
-    font-size: 42px;
+export const ContentSection = styled.section`
+    border-radius: 5px;
+    font-size: 20px;
     padding: 20px;
     font-family: 'Roboto', sans-serif;
+    h3 {
+        font-size: 24px;
+        color: #051229;
+        margin-bottom: 20px;
+    }
     @media screen 
     and (max-device-width: 900px) 
     and (min-device-width: 0px) 
     {   
-        
-        font-size: 30px;
-    
+
     }
 `
 

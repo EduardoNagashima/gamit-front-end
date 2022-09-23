@@ -40,7 +40,7 @@ export default function Feed({ counter, setCounter }) {
             api.delete(`/post/${id}`, config)
                 .then(res => {
                     toast.success('Publicação excluida com sucesso!');
-                    navigate('/');
+                    setCounter(counter + 1);
                 })
                 .catch(err => {
                     console.error(err);
