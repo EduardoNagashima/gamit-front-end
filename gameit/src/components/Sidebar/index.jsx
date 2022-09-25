@@ -81,6 +81,7 @@ export default function Sidebar({ counter, setCounter }) {
                         required
                         type="text"
                         name='tittle'
+                        maxLength='60'
                         value={postInfos.tittle}
                         onChange={e => setPostInfos({ ...postInfos, tittle: e.target.value })}
                     />

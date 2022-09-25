@@ -80,7 +80,7 @@ export default function Post() {
                             <div>
                                 {postInfo.Like?.find(us => us.user.username === userData.username) ? <RiHeartFill onClick={() => like(postInfo.id)} /> : <RiHeartLine onClick={() => like(postInfo.id)} />}
                                 {postInfo._count.Like === 0 ? <h2> 0 curtida(s)! </h2> : <h2>{postInfo._count.Like + ' curtida(s)!'}</h2>}
-                                <RiEyeFill /> <strong> {postInfo.views} vizualizações </strong>
+                          
                             </div>
                             {postInfo.user.username === userData.username ? <RiEraserFill onClick={() => deletePost()} /> : <></>}
                         </IconContext.Provider>

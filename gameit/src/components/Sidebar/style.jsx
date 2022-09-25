@@ -27,6 +27,7 @@ export const PostCreationContainer = styled.div`
     width: 100%;
     background: rgb(47,65,78);
 background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
+box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     p {
             padding: 10px;
             font-weight: 700;
@@ -85,16 +86,19 @@ export const MostViewContainer = styled.div`
     padding: 10px;
     display: flex;
     justify-content: center;
+    word-break: break-word;
     flex-direction: column;
     border-radius: 16px;
     margin-top: 2rem;
     align-items: center;
     background: rgb(47,65,78);
 background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
+box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     p {
         color: #d3d6d8;
         font-weight: 700;
-        font-size: 42px;
+        font-size: 38px;
+        margin-bottom: 10px;
     }
     @media screen 
     and (max-device-width: 1400px) 
@@ -107,14 +111,14 @@ background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
 
 export const UserContainer = styled.div`
     display: flex;
-    padding: 10px;
+    padding: 5px;
     height: auto;
+    gap: 10px;
     width: 100%;
     align-items: center;
     justify-content: baseline;
     div{
         display: flex;
-        width: 100px;
         flex-direction: column;
         align-items: center;
         justify-content: flex-start;
@@ -138,6 +142,7 @@ export const UserContainer = styled.div`
         flex-grow: 2;
         word-break: break-all;
         font-family: 'Roboto', sans-serif;
+        word-break: break-word;
     }
     h3 {
         display: flex;

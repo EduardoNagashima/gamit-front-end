@@ -27,6 +27,7 @@ export const PostDiv = styled.div`
     width: 100%;
     max-width: 920px;
     height: auto;
+    word-break: break-word;
     @media screen 
     and (max-device-width: 1400px) 
     and (min-device-width: 0px) 
