@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv, ErrorMessage, ContentSection } from "./style.jsx";
-import { RiHeartLine, RiHeartFill, RiEyeFill, RiEraserFill } from 'react-icons/ri';
+import { RiHeartLine, RiHeartFill, RiEraserFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/index.jsx";
 import Notify from "../Notify/index.jsx";

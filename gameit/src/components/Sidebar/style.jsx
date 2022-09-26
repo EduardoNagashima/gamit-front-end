@@ -11,12 +11,12 @@ export const SidebarSection = styled.section`
     and (max-device-width: 1400px) 
     and (min-device-width: 0px) 
     {   margin: 0 auto;
+        order: 1;
         width: 100%;
     }
 `
 
 export const PostCreationContainer = styled.div`
-    height: auto;
     padding: 10px;
     display: flex;
     justify-content: center;
@@ -26,8 +26,8 @@ export const PostCreationContainer = styled.div`
     align-items: center;
     width: 100%;
     background: rgb(47,65,78);
-background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
-box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+    background: linear-gradient(138deg, rgba(47,65,78,1) 0%, rgba(44,52,58,1) 66%);
+    box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     p {
             padding: 10px;
             font-weight: 700;
@@ -68,12 +68,7 @@ box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
     and (max-device-width: 800px) 
     and (min-device-width: 0px) 
     { 
-        position: fixed;
-        display: block;
-        padding: 0;
-        margin: 0;
-        top: 0;
-        right: 0;
+        border-radius: 0px;
     }
     }
 `

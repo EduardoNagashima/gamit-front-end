@@ -17,6 +17,7 @@ export const FeedSection = styled.section`
     and (max-device-width: 1400px) 
     and (min-device-width: 0px) 
     { 
+        order: 2;
         width: 100%;
         margin: 0px auto;
         max-width: 1000px;
@@ -48,7 +49,6 @@ export const PostThumbnail = styled.div`
     { 
         width: 100%;
         margin: 20px auto;
-        max-width: 420px;
     }
 `
 
@@ -73,10 +73,6 @@ export const ThumbUserDiv = styled.div`
     { 
         width: 100%;
         margin: 0px auto;
-        max-width: 420px;
-        img {
-            max-width: 420px;
-        }
         p {
             font-size: 12px;
         }
@@ -94,9 +90,7 @@ export const ImgDiv = styled.div`
     and (max-device-width: 800px) 
     and (min-device-width: 0px) 
     { 
-      img {
-        max-width: 420px;
-      }
+
     }
 
 `
