@@ -100,7 +100,7 @@ export default function Sidebar({ counter, setCounter }) {
                         rows="10"
                         cols="30"
                         name='content'
-                        placeholder='I think...'
+                        placeholder='I think... (now accepts MD ## hello world!)'
                         value={postInfos.content}
                         onChange={e => setPostInfos({ ...postInfos, content: e.target.value })}
                     ></textarea>

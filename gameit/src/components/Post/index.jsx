@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Loading from "../Loading/index.jsx";
 import Notify from "../Notify/index.jsx";
 import { toast } from "react-toastify";
+import md from "md";
 
 export default function Post() {
     const { id } = useParams();
@@ -86,7 +87,7 @@ export default function Post() {
                         </IconContext.Provider>
 
                     </div>
-                    <ContentSection><h3>{postInfo.content}</h3></ContentSection>
+                    <ContentSection dangerouslySetInnerHTML={{__html: md(postInfo.content)}}></ContentSection>
                 </PostDiv> : <Loading />
             }
 
