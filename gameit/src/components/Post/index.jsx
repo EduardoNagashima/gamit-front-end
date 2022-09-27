@@ -3,16 +3,14 @@ import { useEffect, useState } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv, ErrorMessage, ContentSection } from "./style.jsx";
-import { RiHeartLine, RiHeartFill, RiEraserFill } from 'react-icons/ri';
-import { useNavigate } from "react-router-dom";
+import { RiHeartLine, RiHeartFill } from 'react-icons/ri';
 import Loading from "../Loading/index.jsx";
 import Notify from "../Notify/index.jsx";
-import { toast } from "react-toastify";
+import DeleteButton from "./deleteButton.jsx";
 import md from "md";
 
 export default function Post() {
     const { id } = useParams();
-    const navigate = useNavigate();
     const [count, setCount] = useState(0);
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
@@ -32,21 +30,6 @@ export default function Post() {
                 setLoading(false);
             })
     }, [token, count]);
-
-    function deletePost() {
-        if (window.confirm('Você tem certeza que quer apagar sua linda publicação?')) {
-            const config = { headers: { "Authorization": `Bearer ${token}` } }
-            api.delete(`/post/${id}`, config)
-                .then(res => {
-                    toast.success('publicação excluida!');
-                    navigate('/');
-                })
-                .catch(err => {
-                    toast.error(err);
-                    console.error(err);
-                })
-        }
-    }
 
     function like(postId) {
         const config = { headers: { "Authorization": `Bearer ${token}` } }
@@ -83,7 +66,7 @@ export default function Post() {
                                 {postInfo._count.Like === 0 ? <h2> 0 curtida(s)! </h2> : <h2>{postInfo._count.Like + ' curtida(s)!'}</h2>}
                           
                             </div>
-                            {postInfo.user.username === userData.username ? <RiEraserFill onClick={() => deletePost()} /> : <></>}
+                            {postInfo.user.username === userData.username ? <DeleteButton token={token} id={id}/> : <></>}
                         </IconContext.Provider>
 
                     </div>

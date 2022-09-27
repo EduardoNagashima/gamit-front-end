@@ -10,6 +10,7 @@ import Jaba from "./components/Jaba";
 
 import "./assets/styles/reset.css";
 import "./assets/styles/style.css";
+import RefreshContext from "./contexts/RefreshContext";
 
 const App = () => {
 
@@ -19,6 +20,7 @@ const App = () => {
 
     return (
         <BrowserRouter>
+        <RefreshContext.Provider value={{count, setCount}}>
             <UserContext.Provider value={{ token, userInfo }}>
                 <Header count={count} />
                 <Routes>
@@ -27,6 +29,7 @@ const App = () => {
                     <Route path="/post/:id" element={<Post setCount={() => setCount(count + 1)} />} />
                 </Routes>
             </UserContext.Provider>
+            </RefreshContext.Provider>
             <Jaba />
         </BrowserRouter>
     );

@@ -1,11 +1,11 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
-import { RiEraserFill, RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
+import { RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
 import { useState, useEffect } from "react";
 import api from "../../services/api";
 import Loading from "../Loading";
-import { toast } from "react-toastify";
+import DeleteButton from "../Post/deleteButton";
 
 export default function Feed({ counter, setCounter }) {
     const [posts, setPosts] = useState([]);
@@ -32,20 +32,6 @@ export default function Feed({ counter, setCounter }) {
 
     function goToPage(id) {
         navigate('/post/' + id);
-    }
-
-    function deletePost(id) {
-        if (window.confirm('Você tem certeza que quer apagar sua linda publicação?')) {
-            const config = { headers: { "Authorization": `Bearer ${token}` } }
-            api.delete(`/post/${id}`, config)
-                .then(res => {
-                    toast.success('Publicação excluida com sucesso!');
-                    setCounter(counter + 1);
-                })
-                .catch(err => {
-                    console.error(err);
-                })
-        }
     }
 
     function like(postId) {
@@ -83,7 +69,7 @@ export default function Feed({ counter, setCounter }) {
                                         <p> {el.views} </p><RiEyeFill style={{ minWidth: '24px' }} />
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
-                                    {el.user.username === userData.username ? <RiEraserFill onClick={() => deletePost(el.id)} /> : <></>}
+                                    {el.user.username === userData.username ? <DeleteButton token={token} id={el.id} setCounter={setCounter} counter={counter}/> : <></>}
                                 </IconContext.Provider>
                             </ThumbDetails>
                         </div>
