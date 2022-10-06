@@ -10,14 +10,13 @@ function deletePost(token, id, setCount, count) {
         const config = { headers: { "Authorization": `Bearer ${token}` } }
         api.delete(`/post/${id}`, config)
         .then(res => {
-                toast.success('publicação excluida!');
-                setCount(count+1)
-                console.log(count)
-            })
-            .catch(err => {
-                toast.error(err);
-                console.error(err);
-            })
+            toast.success('publicação excluida!');
+            setCount(count + 1)
+        })
+        .catch(err => {
+            toast.error(err);
+            console.error(err);
+        })
     }
 }
 

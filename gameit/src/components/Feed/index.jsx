@@ -2,12 +2,15 @@ import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDet
 import { RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
 import Loading from "../Loading";
 import DeleteButton from "../Post/deleteButton";
+import RefreshContext from "../../contexts/RefreshContext";
 
-export default function Feed({ counter, setCounter }) {
+export default function Feed() {
+    const {counter, setCounter} = useContext(RefreshContext);
+
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
@@ -28,7 +31,7 @@ export default function Feed({ counter, setCounter }) {
         }).finally(() => {
             setLoading(false);
         })
-    }, [counter]);
+    }, [{counter}]);
 
     function goToPage(id) {
         navigate('/post/' + id);

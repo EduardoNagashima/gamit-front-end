@@ -1,12 +1,15 @@
 import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style"
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { FaEye } from "react-icons/fa";
 import Notify from "../Notify";
 import { toast } from "react-toastify";
 
-export default function Sidebar({ counter, setCounter }) {
+import RefreshContext from '../../contexts/RefreshContext.jsx';
+
+export default function Sidebar() {
+    const {count, setCount} = useContext(RefreshContext);
     const navigate = useNavigate();
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [mostViews, setMostViews] = useState([]);
@@ -42,7 +45,7 @@ export default function Sidebar({ counter, setCounter }) {
                     content: ''
                 });
                 toast.success('Postagem criada com sucesso!');
-                setCounter(counter + 1);
+                setCount(count + 1);
             })
             .catch(err => {
                 toast.error(err.response.data);
@@ -64,7 +67,7 @@ export default function Sidebar({ counter, setCounter }) {
             .then(res => {
                 setMostViews(res.data);
             })
-    }, [])
+    }, [count])
 
     function goToPage(id) {
         navigate('/post/' + id);

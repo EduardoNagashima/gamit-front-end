@@ -1,13 +1,15 @@
 import { LoginPage,LoginForm } from "./style";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
 import { RiLockPasswordFill, RiUser3Fill } from "react-icons/ri";
 import { IconContext } from "react-icons/lib";
 import Notify from "../Notify";
 import { toast } from "react-toastify";
+import RefreshContext from "../../contexts/RefreshContext";
 
-export default function Login({ count, setCount }) {
+export default function Login() {
+    const { count, setCount } = useContext(RefreshContext);
     const navigate = useNavigate();
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     useEffect(() => {

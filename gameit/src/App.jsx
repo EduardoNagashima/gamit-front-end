@@ -25,8 +25,8 @@ const App = () => {
                 <Header count={count} />
                 <Routes>
                     <Route path="/" element={<Home token={token} />} />
-                    <Route path="/login" element={<Login count={count} setCount={setCount} />} />
-                    <Route path="/post/:id" element={<Post setCount={() => setCount(count + 1)} />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/post/:id" element={<Post  />} />
                 </Routes>
             </UserContext.Provider>
             </RefreshContext.Provider>

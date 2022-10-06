@@ -1,5 +1,5 @@
 import { useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import api from "../../services/api.js";
 import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv, ErrorMessage, ContentSection } from "./style.jsx";
@@ -7,11 +7,12 @@ import { RiHeartLine, RiHeartFill } from 'react-icons/ri';
 import Loading from "../Loading/index.jsx";
 import Notify from "../Notify/index.jsx";
 import DeleteButton from "./deleteButton.jsx";
+import RefreshContext from "../../contexts/RefreshContext";
 import md from "md";
 
 export default function Post() {
     const { id } = useParams();
-    const [count, setCount] = useState(0);
+    const {count, setCount} = useContext(RefreshContext);
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [postInfo, setPostInfo] = useState({});
@@ -43,7 +44,6 @@ export default function Post() {
     }
 
     return (
-        
         <PostSection>
             <Notify/>
             {!loading && postInfo.user ?
