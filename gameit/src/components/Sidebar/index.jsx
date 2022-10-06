@@ -1,4 +1,4 @@
-import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style";
+import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer, ConfirmButton } from "./style";
 import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -13,6 +13,7 @@ export default function Sidebar() {
     const navigate = useNavigate();
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [mostViews, setMostViews] = useState([]);
+    const [loading, setLoading] = useState(false);
     const [postInfos, setPostInfos] = useState({
         tittle: '',
         coverImg: '',
@@ -39,23 +40,28 @@ export default function Sidebar() {
         }
         api.post('/post', body, config)
             .then(res => {
+                setLoading(true);
                 setPostInfos({
                     tittle: '',
                     coverImg: '',
                     content: ''
                 });
                 toast.success('Postagem criada com sucesso!');
-                setCount(count + 1);
             })
             .catch(err => {
                 toast.error(err.response.data);
                 if (err.response.data[0].context.label === 'coverImg') {
                     toast.warn('Coloque uma imagem de fundo válida: http(s)://...(.png, .jpg, .jpeg, .gif, .png, .svg)')
                 }
+            })
+            .finally(()=>{
+                setLoading(false);
+                setCount(count + 1);
             });
     }
 
     useEffect(() => {
+        console.log(loading)
         const token = JSON.parse(localStorage.getItem('authorization'));
         const config = {
             headers: {
@@ -107,7 +113,7 @@ export default function Sidebar() {
                         value={postInfos.content}
                         onChange={e => setPostInfos({ ...postInfos, content: e.target.value })}
                     ></textarea>
-                    <button type="submit"> Publish </button>
+                    <ConfirmButton onClick={postPost} type="submit" disabled={loading}> Publish </ConfirmButton>
                 </form>
             </PostCreationContainer>
 

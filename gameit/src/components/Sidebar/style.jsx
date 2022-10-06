@@ -51,25 +51,30 @@ export const PostCreationContainer = styled.div`
         border: none;
         resize: none;
     }
-    button {
-        width: 100%;
-        color: white;
-        font-size: 20px;
-        font-weight: 700;
-        font-family: 'Roboto', sans-serif;
-        height: 30px;
-        background-color: #f57373;
-        border: none;
-        border-radius: 5px;
-        &:hover {
-            background-color: #1f2529;
-        }
+`
+
+export const ConfirmButton = styled.div`
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    color: white;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Roboto', sans-serif;
+    background-color: ${props=> props.disabled ? '#1f2529' : '#f57373'};
+    border: none;
+    border-radius: 5px;
+    &:hover {
+        background-color: #1f2529;
+    }
     @media screen 
     and (max-device-width: 800px) 
     and (min-device-width: 0px) 
     { 
         border-radius: 0px;
-    }
     }
 `
 
