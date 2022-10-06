@@ -3,7 +3,7 @@ import styled from "styled-components";
 export default function Jaba() {
     return (
         <MeDaUmEmprego>
-            <h4> Deselvolvido por &#169; <a target="_blank" href="https://github.com/EduardoNagashima">Eduardo Nagashima</a> </h4>
+            <h4> Deselvolvido por &#169; <a target="_blank" href="https://github.com/EduardoNagashima" rel="noreferrer">Eduardo Nagashima</a> </h4>
         </MeDaUmEmprego>
     );
 }

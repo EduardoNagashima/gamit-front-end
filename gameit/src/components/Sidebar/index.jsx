@@ -1,10 +1,10 @@
-import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style"
+import { SidebarSection, PostCreationContainer, UserContainer, MostViewContainer } from "./style";
 import { useState, useEffect, useContext } from "react";
-import api from "../../services/api";
 import { useNavigate } from "react-router-dom";
-import { FaEye } from "react-icons/fa";
-import Notify from "../Notify";
 import { toast } from "react-toastify";
+import { FaEye } from "react-icons/fa";
+import api from "../../services/api";
+import Notify from "../Notify";
 
 import RefreshContext from '../../contexts/RefreshContext.jsx';
 

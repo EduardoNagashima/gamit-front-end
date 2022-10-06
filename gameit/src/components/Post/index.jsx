@@ -1,24 +1,32 @@
-import { useParams } from "react-router-dom";
-import { useEffect, useState, useContext } from "react";
-import api from "../../services/api.js";
-import { IconContext } from "react-icons/lib";
 import { PostSection, PostDiv, UserInfoDiv, ErrorMessage, ContentSection } from "./style.jsx";
+import RefreshContext from "../../contexts/RefreshContext";
 import { RiHeartLine, RiHeartFill } from 'react-icons/ri';
+import { useParams, useNavigate } from "react-router-dom";
+import { useEffect, useState, useContext } from "react";
+import DeleteButton from "./deleteButton.jsx";
+import { IconContext } from "react-icons/lib";
 import Loading from "../Loading/index.jsx";
 import Notify from "../Notify/index.jsx";
-import DeleteButton from "./deleteButton.jsx";
-import RefreshContext from "../../contexts/RefreshContext";
+import api from "../../services/api.js";
+import { toast } from "react-toastify";
 import md from "md";
 
 export default function Post() {
+    const navigate = useNavigate();
     const { id } = useParams();
-    const {count, setCount} = useContext(RefreshContext);
+    const {count, setCount, toastCount, setToastCount} = useContext(RefreshContext);
+    const [isExcluded, setIsExcluded] = useState(false);
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [postInfo, setPostInfo] = useState({});
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if (isExcluded){
+            toast.success('Publicação excluida!');
+            setToastCount(toastCount + 1);
+            return navigate('/');
+        } 
         const config = { headers: { "Authorization": `Bearer ${token}` } }
         api.get(`/post/${id}`, config)
             .then(res => {
@@ -66,7 +74,7 @@ export default function Post() {
                                 {postInfo._count.Like === 0 ? <h2> 0 curtida(s)! </h2> : <h2>{postInfo._count.Like + ' curtida(s)!'}</h2>}
                           
                             </div>
-                            {postInfo.user.username === userData.username ? <DeleteButton token={token} id={id}/> : <></>}
+                            {postInfo.user.username === userData.username ? <DeleteButton setIsExcluded={setIsExcluded} token={token} id={id}/> : <></>}
                         </IconContext.Provider>
 
                     </div>

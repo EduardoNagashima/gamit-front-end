@@ -1,8 +1,8 @@
-import Feed from "../Feed";
-import Sidebar from "../Sidebar";
-import { HomeSection } from "./style";
-import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { HomeSection } from "./style";
+import Sidebar from "../Sidebar";
+import Feed from "../Feed";
 
 export default function Home() {
     const token = JSON.parse(localStorage.getItem('authorization'));

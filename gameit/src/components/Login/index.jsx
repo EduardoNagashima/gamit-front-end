@@ -1,12 +1,12 @@
-import { LoginPage,LoginForm } from "./style";
-import { useState, useEffect, useContext } from "react";
-import api from "../../services/api";
-import { useNavigate } from "react-router-dom";
 import { RiLockPasswordFill, RiUser3Fill } from "react-icons/ri";
-import { IconContext } from "react-icons/lib";
-import Notify from "../Notify";
-import { toast } from "react-toastify";
 import RefreshContext from "../../contexts/RefreshContext";
+import { useState, useEffect, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { IconContext } from "react-icons/lib";
+import { LoginPage,LoginForm } from "./style";
+import { toast } from "react-toastify";
+import api from "../../services/api";
+import Notify from "../Notify";
 
 export default function Login() {
     const { count, setCount } = useContext(RefreshContext);

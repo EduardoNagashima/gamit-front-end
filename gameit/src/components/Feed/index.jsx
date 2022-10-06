@@ -1,47 +1,46 @@
 import { FeedSection, ThumbTittle, ThumbUserDiv, PostThumbnail, ImgDiv, ThumbDetails } from "./style";
 import { RiHeartLine, RiHeartFill, RiEyeFill } from 'react-icons/ri';
+import RefreshContext from "../../contexts/RefreshContext";
+import { useState, useEffect, useContext } from "react";
+import DeleteButton from "../Post/deleteButton";
 import { useNavigate } from "react-router-dom";
 import { IconContext } from "react-icons/lib";
-import { useState, useEffect, useContext } from "react";
 import api from "../../services/api";
 import Loading from "../Loading";
-import DeleteButton from "../Post/deleteButton";
-import RefreshContext from "../../contexts/RefreshContext";
+import Notify from "../Notify";
 
 export default function Feed() {
-    const {counter, setCounter} = useContext(RefreshContext);
-
+    const {count, setCount} = useContext(RefreshContext);
     const [posts, setPosts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [userData] = useState(JSON.parse(localStorage.getItem('userInfo')));
     const [token] = useState(JSON.parse(localStorage.getItem('authorization')));
     const navigate = useNavigate();
-
+    
     useEffect(() => {
         const token = JSON.parse(localStorage.getItem('authorization'));
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        }
-        api.get("/posts", config).then(res => {
+        const config = {headers: { "Authorization": `Bearer ${token}`}};
+        api.get("/posts", config)
+        .then(res => {
             setPosts(res.data);
-        }).catch(err => {
+        })
+        .catch(err => {
             console.error(err);
-        }).finally(() => {
+        })
+        .finally(() => {
             setLoading(false);
         })
-    }, [{counter}]);
+    }, [count]);
 
     function goToPage(id) {
         navigate('/post/' + id);
     }
 
     function like(postId) {
-        const config = { headers: { "Authorization": `Bearer ${token}` } }
+        const config = {headers: { "Authorization": `Bearer ${token}`}};
         api.post('/like', { postId }, config)
             .then(res => {
-                setCounter(counter + 1);
+                setCount(count + 1);
             })
             .catch(err => {
                 console.error(err);
@@ -50,6 +49,7 @@ export default function Feed() {
 
     return (
         <FeedSection>
+            <Notify/>
             {!loading && posts?.map(el => {
                 return (
                     <PostThumbnail key={el.id}>
@@ -72,7 +72,7 @@ export default function Feed() {
                                         <p> {el.views} </p><RiEyeFill style={{ minWidth: '24px' }} />
                                         <small>{el.createAt.slice(0, -5).replaceAll('-', '/').replace('T', ' - Time: ')}</small>
                                     </div>
-                                    {el.user.username === userData.username ? <DeleteButton token={token} id={el.id} setCounter={setCounter} counter={counter}/> : <></>}
+                                    {el.user.username === userData.username ? <DeleteButton token={token} id={el.id} /> : <></>}
                                 </IconContext.Provider>
                             </ThumbDetails>
                         </div>

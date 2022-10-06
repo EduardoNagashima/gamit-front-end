@@ -106,6 +106,7 @@ box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 
 export const UserContainer = styled.div`
     display: flex;
+    cursor: pointer;
     padding: 5px;
     height: auto;
     gap: 10px;
